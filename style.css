@@ -1,0 +1,130 @@
+.cd__main{
+background: #1c92d2;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f2fcfe, #1c92d2) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+/* ————————————————————–
+  Tree core styles
+*/
+.tree { margin: 1em 0 0 2em; }
+
+.tree input {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  }
+
+.tree input ~ ul { display: none; }
+
+.tree input:checked ~ ul { display: block; }
+
+/* ————————————————————–
+  Tree rows
+*/
+.tree li {
+  line-height: 1.2;
+  position: relative;
+  padding: 0 0 0.5em 1em;
+  }
+
+.tree ul li { padding: 0.5em 0 0 1em; }
+
+.tree > li:last-child { padding-bottom: 0; }
+
+/* ————————————————————–
+  Tree labels
+*/
+.tree_label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  }
+
+label.tree_label { cursor: pointer; }
+
+/* label.tree_label:hover { color: #666; } */
+
+/* ————————————————————–
+  Tree expanded icon
+*/
+label.tree_label:before {
+  background: #000;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  float: left;
+  margin: 0 1em 0 -2em;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
+  content: '+';
+  text-align: center;
+  line-height: .9em;
+  }
+
+:checked ~ label.tree_label:before { content: '–'; }
+
+/* ————————————————————–
+  Tree branches
+*/
+.tree li:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -.5em;
+  display: block;
+  width: 0;
+  border-left: 1px solid #777;
+  content: "";
+  }
+
+.tree_label:after {
+  position: absolute;
+  top: 0;
+  left: -1.5em;
+  display: block;
+  height: 0.5em;
+  width: 1em;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #777;
+  border-radius: 0 0 0 .3em;
+  content: '';
+  }
+
+label.tree_label:after { border-bottom: 0; }
+
+:checked ~ label.tree_label:after {
+  border-radius: 0 .3em 0 0;
+  border-top: 1px solid #777;
+  border-right: 1px solid #777;
+  border-bottom: 0;
+  border-left: 0;
+  bottom: 0;
+  top: 0.5em;
+  height: auto;
+  }
+
+.tree li:last-child:before {
+  height: 1em;
+  bottom: auto;
+  }
+
+.tree > li:last-child:before { display: none; }
+
+.tree_label:hover {
+  color: red;
+}
+
+.tree_label.highlight {
+  color: darkred;
+  background-color: #f0f0f0; /* Example background color change */
+}
+
+.tree_label.parent-highlight {
+  color: darkblue; /* Highlight color for parent nodes */
+  background-color: #e0f7fa; /* Optional background color for parents */
+}
+
+.tree_label.child-highlight {
+  color: darkred; /* Highlight color for child nodes */
+  background-color: #fce4ec; /* Optional background color for children */
+}

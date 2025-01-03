@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./css/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+   </head>
+   <body>
+      <ul class="tree">
+
+
+        {% macro render_person(person, counter) %}
+        <li>
+            {% set current_id = counter[0] %} 
+            {% set counter = [counter[0] + 1] %}
+            {% if person.children %}
+                <input type="checkbox" id="c{{ current_id }}"/>
+                <label class="tree_label" for="c{{ current_id }}"> {{ person.last_name }} {{ person.first_name }} </label>
+                ⚭ x {{ family[person.spouses[0]].last_name }}
+                <ul>
+                {% for child_id in person.children %}
+                    {{ render_person(family[child_id], counter) }}
+                {% endfor %}
+                </ul>
+            {% else %}
+                <span class="tree_label">{{ person.last_name }} {{ person.first_name }}</span>
+            {% endif %}
+        </li>
+        {% endmacro %}
+
+        {% set initial_counter = [0] %}
+        {{ render_person(family[1], initial_counter) }}
+
+      </ul>
+      
+      <script src="./js/script.js"></script>
+   </body>
+</html>
