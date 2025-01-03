@@ -16,19 +16,15 @@ def main():
                 "birth": row["datum_narodenia"],
                 "death": row["datum_umrtia"],
                 "spouses": eval(row["sobaseny_s"]) if pd.notna(row["sobaseny_s"]) else [],
-                "father": row["otec"],
-                "mother": row["matka"],
+                "parents": eval(row["rodicia"]) if pd.notna(row["rodicia"]) else [],
                 "children": []
             }
             family_tree[person["id"]] = person
 
-        for _, row in df.iterrows():
-            if pd.notna(row["otec"]):
-                family_tree[row["otec"]]["children"].append(row["id"])
-
-            if pd.notna(row["matka"]):
-                family_tree[row["matka"]]["children"].append(row["id"])
-
+        for person in family_tree.values():
+            for parent_id in person["parents"]:
+                family_tree[parent_id]["children"].append(person["id"])
+                
         return family_tree
 
     family_tree = generate_family_tree(df)

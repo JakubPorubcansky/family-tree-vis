@@ -1,0 +1,20 @@
+                <ul>
+                    {% if person.spouses %}
+                        {% for spouse_id in person.spouses %}
+                            <li>
+                                {% set current_id = counter[0] %} 
+                                {% set counter = [counter[0] + 1] %}
+                                <input type="checkbox" id="c{{ current_id }}"/>
+                                <label class="tree_label" for="c{{ current_id }}"> ⚭ {{ person.last_name }} {{ person.first_name }} </label>
+                                <ul>
+                                {% for child_id in person.children %}
+                                    {% if spouse_id in family[child_id].parents %}
+                                        {{ render_person(family[child_id], counter) }}
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                            </li>   
+                        {% endfor %}
+                    {% endif %}
+    
+                </ul>
