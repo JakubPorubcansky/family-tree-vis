@@ -110,21 +110,14 @@ label.tree_label:after { border-bottom: 0; }
 
 .tree > li:last-child:before { display: none; }
 
-.tree_label:hover {
-  color: red;
-}
-
-.tree_label.highlight {
-  color: darkred;
-  background-color: #f0f0f0; /* Example background color change */
+.tree_label.current-highlight {
+  font-weight: bold;
 }
 
 .tree_label.parent-highlight {
-  color: darkblue; /* Highlight color for parent nodes */
-  background-color: #e0f7fa; /* Optional background color for parents */
+  background-color: #e0f7fa;
 }
 
 .tree_label.child-highlight {
-  color: darkred; /* Highlight color for child nodes */
-  background-color: #fce4ec; /* Optional background color for children */
+  background-color: #fce4ec;
 }
