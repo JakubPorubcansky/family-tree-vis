@@ -3,7 +3,7 @@ from jinja2 import Template, FileSystemLoader, Environment
 
 def main():
     # Load the CSV file.
-    df = pd.read_csv('input.csv', delimiter=',')
+    df = pd.read_csv('input.csv', delimiter=';')
 
     # Start with the root of the family tree.
     def generate_family_tree(df):
@@ -15,10 +15,14 @@ def main():
                 "last_name": row["priezvisko"],
                 "birth": row["datum_narodenia"],
                 "death": row["datum_umrtia"],
+                "marriage_dates": eval(row["sobase"]) if pd.notna(row["sobase"]) else [],
                 "spouses": eval(row["sobaseny_s"]) if pd.notna(row["sobaseny_s"]) else [],
                 "parents": eval(row["rodicia"]) if pd.notna(row["rodicia"]) else [],
                 "children": []
             }
+
+            assert len(person["marriage_dates"]) == len(person["spouses"]), "Mismatch in number of marriage dates and number of spouses"
+
             family_tree[person["id"]] = person
 
         for person in family_tree.values():
