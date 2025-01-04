@@ -41,8 +41,6 @@ background: linear-gradient(to right, #f2fcfe, #1c92d2) !important; /* W3C, IE 1
 
 label.tree_label { cursor: pointer; }
 
-/* label.tree_label:hover { color: #666; } */
-
 /* ————————————————————–
   Tree expanded icon
 */
@@ -111,7 +109,8 @@ label.tree_label:after { border-bottom: 0; }
 .tree > li:last-child:before { display: none; }
 
 .tree_label.current-highlight {
-  font-weight: bold;
+  text-decoration: underline;
+
 }
 
 .tree_label.parent-highlight {
@@ -120,4 +119,8 @@ label.tree_label:after { border-bottom: 0; }
 
 .tree_label.child-highlight {
   background-color: #fce4ec;
+}
+
+.tree_label b {
+  font-weight: bold;
 }

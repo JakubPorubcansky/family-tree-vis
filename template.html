@@ -13,7 +13,7 @@
         {% macro render_person(person, counter) %}
         <li>
             {% if not person.spouses and not person.children %}
-                <span class="tree_label">{{ person.last_name }} {{ person.first_name }}</span>
+                <span class="tree_label"> <b> {{ person.last_name }} {{ person.first_name }} </b> </span>
             {% endif %}
 
             {% if person.spouses %}
@@ -27,9 +27,9 @@
                         {% endif %}
                     {% endfor %}
 
-                    {% set text_to_render = person.last_name ~ " " ~ person.first_name ~ " (⚭ " ~ person.marriage_dates[spouse_counter.value - 1] ~ " ⚭ " ~ family[spouse_id].last_name ~ " " ~ family[spouse_id].first_name ~ ")" %}
+                    {% set marraige_text_to_render = " ⚭ " ~ family[spouse_id].last_name ~ " " ~ family[spouse_id].first_name %}
                     {% if person.spouses|length > 1 %}
-                        {% set text_to_render = "(" ~ spouse_counter.value ~ ") " ~ text_to_render %}
+                        {% set marraige_text_to_render = "(" ~ spouse_counter.value ~ ") " ~ marraige_text_to_render %}
                     {% endif %}
                     
                     {% if children_to_render %}
@@ -37,7 +37,7 @@
                             {% set current_spouse_id = counter.value %} 
                             {% set counter.value = counter.value + 1 %}
                             <input type="checkbox" id="c{{ current_spouse_id }}"/>
-                            <label class="tree_label" for="c{{ current_spouse_id }}"> {{ text_to_render }} </label>
+                            <label class="tree_label" for="c{{ current_spouse_id }}"> <b> {{ person.last_name }} {{ person.first_name }}</b> {{ marraige_text_to_render }} </label>
 
                             <ul>
                             {% for child_id in children_to_render %}
@@ -46,7 +46,7 @@
                             </ul>
                         </li>   
                     {% else %}
-                        <span class="tree_label"> {{ text_to_render }} </span>
+                        <span class="tree_label"> <b> {{ person.last_name }} {{ person.first_name }}</b> {{ marraige_text_to_render }} </span>
                     {% endif %}
                 {% endfor %}
             {% elif person.children %}
@@ -54,7 +54,7 @@
                     {% set current_child_id = counter.value %} 
                     {% set counter.value = counter.value + 1 %}
                     <input type="checkbox" id="c{{ current_child_id }}"/>
-                    <label class="tree_label" for="c{{ current_child_id }}"> {{ person.last_name }} {{ person.first_name }} ⚭ ??? </label>
+                    <label class="tree_label" for="c{{ current_child_id }}"> <b> {{ person.last_name }} {{ person.first_name }} </b> ⚭ ??? </label>
                     <ul>
                         {% for child_id in person.children %}
                             {{ render_person(family[child_id], counter) }}
