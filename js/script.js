@@ -20,13 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
             section2.className = 'tooltip-section';
             section2.innerHTML = text2 || '';
 
-            const section3 = document.createElement('div');
-            section3.className = 'tooltip-section';
-            section3.innerHTML = text3 || '';
-
             tooltip.appendChild(section1);
             tooltip.appendChild(section2);
-            tooltip.appendChild(section3);
 
             item.appendChild(tooltip);
         }

@@ -34,6 +34,8 @@
                         {% set marriage_text_to_render = "(" ~ spouse_counter.value ~ ") " ~ marriage_text_to_render %}
                     {% endif %}
                     
+                    {% set spouses_index_of_marriage = person.marriage_dates[spouse_counter.value - 1] | index_of(family[spouse_id].marriage_dates) %}
+
                     {% if children_to_render %}
                         <li>
                             {% set current_counter = counter.value %} 
@@ -41,7 +43,10 @@
                             <input type="checkbox" id="c{{ current_counter }}"/>
                             <label class="tree_label" for="c{{ current_counter }}">
                                 <b>{{ person.last_name }} {{ person.first_name }}</b> {{ marriage_text_to_render }}
-                                <span class="tooltip-content" style="display: none;">{{ person.first_name }} </br> * {{ person.birth }} </br> ♱ {{ person.death }} ({{ person.age }}); ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }}; {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ♱ {{ family[spouse_id].death }} ({{ family[spouse_id].age }}) </span>
+                                <span class="tooltip-content" style="display: none;">
+                                    {{ person.first_name }} </br>  * {{ person.birth }} </br> ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }} ({{person.marriage_ages[spouse_counter.value - 1]}}) </br> ♱ {{ person.death }} ({{ person.age }}); 
+                                    {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ⚭ {{ family[spouse_id].marriage_dates[spouses_index_of_marriage] }} ({{family[spouse_id].marriage_ages[spouses_index_of_marriage]}}) </br> ♱ {{ family[spouse_id].death }} ({{ family[spouse_id].age }}) 
+                                </span>
                             </label>
 
                             <ul>
@@ -54,7 +59,10 @@
                         <li>
                             <span class="tree_label">
                                 <b>{{ person.last_name }} {{ person.first_name }}</b> {{ marriage_text_to_render }}
-                                <span class="tooltip-content" style="display: none;">{{ person.first_name }} </br> * {{ person.birth }} </br> ♱ {{ person.death }} ({{ person.age }}); ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }} ; {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ♱ {{ family[spouse_id].death }} ({{ family[spouse_id].age }})</span>
+                                <span class="tooltip-content" style="display: none;">
+                                    {{ person.first_name }} </br> * {{ person.birth }} </br> ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }} ({{person.marriage_ages[spouse_counter.value - 1]}}) </br> ♱ {{ person.death }} ({{ person.age }});
+                                    {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ⚭ {{ family[spouse_id].marriage_dates[spouses_index_of_marriage] }} ({{family[spouse_id].marriage_ages[spouses_index_of_marriage]}}) </br>♱ {{ family[spouse_id].death }} ({{ family[spouse_id].age }})
+                                </span>
                             </span>
                         </li>
                     {% endif %}
@@ -66,7 +74,9 @@
                     <input type="checkbox" id="c{{ current_counter }}"/>
                     <label class="tree_label" for="c{{ current_counter }}">
                         <b>{{ person.last_name }} {{ person.first_name }}</b> ⚭ ???
-                        <span class="tooltip-content" style="display: none;">* {{ person.birth }} </br> ♱ {{ person.death }} ({{ person.age }}); ;</span>
+                        <span class="tooltip-content" style="display: none;">
+                            * {{ person.birth }} </br> ♱ {{ person.death }} ({{ person.age }});
+                        </span>
                     </label>
                     <ul>
                         {% for child_id in person.children %}

@@ -2,6 +2,12 @@ import pandas as pd
 from datetime import datetime
 from jinja2 import Template, FileSystemLoader, Environment
 
+def index_of(value, list_):
+    try:
+        return list_.index(value)
+    except ValueError:
+        return -1
+
 class CustomDate:
     POSSIBLE_DATE_FORMATS = ["%Y-%m-%d", "%Y-%m", "%Y"]
 
@@ -57,6 +63,11 @@ def main():
             family_tree[person["id"]] = person
 
         for person in family_tree.values():
+            for marriage_date, spouse_id in zip(person["marriage_dates"], person["spouses"]):
+                if marriage_date not in family_tree[spouse_id]["marriage_dates"]:
+                    family_tree[spouse_id]["marriage_dates"].append(marriage_date)
+                    family_tree[spouse_id]["spouses"].append(person["id"])
+                    
             for parent_id in person["parents"]:
                 family_tree[parent_id]["children"].append(person["id"])
                 
@@ -65,6 +76,7 @@ def main():
     family_tree = generate_family_tree(df)
 
     env = Environment(loader=FileSystemLoader("."))
+    env.filters['index_of'] = index_of
     template = env.get_template("template.html")
     html_content = template.render(family=family_tree)
 

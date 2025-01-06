@@ -137,16 +137,16 @@ label.tree_label:after { border-bottom: 0; }
 
 .tooltip-section:first-child {
   text-align: left;
-  min-width: 120px;
+  min-width: 130px;
 }
 
-.tooltip-section:nth-child(2) {
+/* .tooltip-section:nth-child(2) {
   text-align: left;
-}
+} */
 
 .tooltip-section:last-child {
   text-align: left;
-  min-width: 120px;
+  min-width: 130px;
 }
 
 .tree_label:hover .tooltip {
