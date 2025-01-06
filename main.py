@@ -11,17 +11,18 @@ def main():
         for _, row in df.iterrows():
             person = {
                 "id": row["id"],
-                "first_name": row["meno"],
-                "last_name": row["priezvisko"],
-                "birth": row["datum_narodenia"],
-                "death": row["datum_umrtia"],
-                "marriage_dates": eval(row["sobase"]) if pd.notna(row["sobase"]) else [],
-                "spouses": eval(row["sobaseny_s"]) if pd.notna(row["sobaseny_s"]) else [],
-                "parents": eval(row["rodicia"]) if pd.notna(row["rodicia"]) else [],
+                "first_name": row["first_name"],
+                "last_name": row["last_name"],
+                "birth": row["birth_date"] if pd.notna(row["birth_date"]) else "???",
+                "death": row["death_date"] if pd.notna(row["death_date"]) else "???",
+                "marriage_dates": eval(row["marriage_dates"]) if pd.notna(row["marriage_dates"]) else [],
+                "spouses": eval(row["spouses"]) if pd.notna(row["spouses"]) else [],
+                "parents": eval(row["parents"]) if pd.notna(row["parents"]) else [],
                 "children": []
             }
 
-            assert len(person["marriage_dates"]) == len(person["spouses"]), "Mismatch in number of marriage dates and number of spouses"
+            assert len(person["marriage_dates"]) == len(person["spouses"]), \
+                "Mismatch in number of marriage dates and number of spouses for person {} {}".format(person["first_name"], person["last_name"])
 
             family_tree[person["id"]] = person
 
