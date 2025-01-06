@@ -11,12 +11,13 @@
         <ul class="tree">
 
         {% macro render_person(person, counter) %}
-        <li>
             {% if not person.spouses and not person.children %}
-                <span class="tree_label">
-                    <b>{{ person.last_name }} {{ person.first_name }}</b>
-                    <span class="tooltip-content" style="display: none;">* {{ person.birth }} </br> ♱ {{ person.death }}; ; </span>
-                </span>
+                <li>
+                    <span class="tree_label">
+                        <b>{{ person.last_name }} {{ person.first_name }}</b>
+                        <span class="tooltip-content" style="display: none;">* {{ person.birth }} </br> ♱ {{ person.death }}; ; </span>
+                    </span>
+                </li>
             {% elif person.spouses %}
                 {% set spouse_counter = namespace(value=0) %}
                 {% for spouse_id in person.spouses %}
@@ -50,10 +51,12 @@
                             </ul>
                         </li>
                     {% else %}
-                        <span class="tree_label">
-                            <b>{{ person.last_name }} {{ person.first_name }}</b> {{ marriage_text_to_render }}
-                            <span class="tooltip-content" style="display: none;">{{ person.first_name }} </br> * {{ person.birth }} </br> ♱ {{ person.death }}; ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }} ; {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ♱ {{ family[spouse_id].death }}</span>
-                        </span>
+                        <li>
+                            <span class="tree_label">
+                                <b>{{ person.last_name }} {{ person.first_name }}</b> {{ marriage_text_to_render }}
+                                <span class="tooltip-content" style="display: none;">{{ person.first_name }} </br> * {{ person.birth }} </br> ♱ {{ person.death }}; ⚭ {{ person.marriage_dates[spouse_counter.value - 1] }} ; {{ family[spouse_id].first_name }} </br> * {{ family[spouse_id].birth }} </br> ♱ {{ family[spouse_id].death }}</span>
+                            </span>
+                        </li>
                     {% endif %}
                 {% endfor %}
             {% elif person.children %}
@@ -72,7 +75,6 @@
                     </ul>
                 </li>
             {% endif %}
-        </li>
         {% endmacro %}
             
         {% set counter = namespace(value=0) %}
