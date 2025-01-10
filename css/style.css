@@ -99,11 +99,11 @@ label.tree_label:after { border-bottom: 0; }
 }
 
 .tree_label.parent-highlight {
-  background-color: #e0f7fa;
+  background-color: #b3e4e8;
 }
 
 .tree_label.child-highlight {
-  background-color: #fce4ec;
+  background-color: #f6cbd5;
 }
 
 .tree_label b {
