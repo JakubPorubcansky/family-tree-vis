@@ -6,7 +6,7 @@ id;last_name;first_name;birth_date;death_date;marriage_dates;spouses;parents
 5;Vrabec;Jozef;1854-03-16;1897-10-07;["1878-02-12"];[4];
 6;Knapec;Žofia;1863-05-21;1866-10-09;[];[];[3,1]
 7;Vrabec;Alžbeta;1877-12-08;1947-07-10;["1899-02-08"];[8];[5,4]
-8;Moravčík Bičanovský;Pavol;1977-01-30;;["1899-02-08"];[7];
+8;Moravčík Bičanovský;Pavol;1877-01-30;;["1899-02-08"];[7];
 9;Moravčík Bičanovský;Anna;1900-01-19;1991-04-19;["1921-01-19"];[10];[8,7]
 10;Mintuch;Jozef;1894-07-01;1967-04-14;["1921-01-19"];[9];
 11;Mintuch;Rozália;1921-08-30;1989-06-12;[];[];[9,10]
@@ -46,7 +46,7 @@ id;last_name;first_name;birth_date;death_date;marriage_dates;spouses;parents
 45;Komačka;Štefan;1935-02-01;2011-05-24;;[];[]
 46;Berzák;Hermína;1899-08-10;1978-05-23;["1922-02-08"];[47];[48,49]
 47;Majtán;Vincent;1896-01-15;1982-04-24;;[];[]
-48;Knapec;Barbara;1865-12-08;;[];[];[3,1]
+48;Knapec;Barbara;1865-12-08;;["1893-11-15"];[120];[3,1]
 49;Berzák;Jozef;1867-03-30;;[];[];[]
 50;Vrabec;Mária;1880-08-28;1881-02-27;[];[];[5,4]
 51;Vrabec;Paulina;1885-11-28;1885-12-23;[];[];[5,4]
@@ -116,5 +116,6 @@ id;last_name;first_name;birth_date;death_date;marriage_dates;spouses;parents
 115;Kováčik Ďuriš;Mária;1897-01-10;;[];[];[]
 116;Trnovec;Štefan;;;[];[];[]
 117;Ďuriš;Anna;1899-06-01;1899-09-17;[];[];[]
-118;Kováčik;Ďuriš Ondrej;1871-05-31;1942-12-23;["1896-05-06"];[119];[]
+118;Kováčik Ďuriš;Ondrej;1871-05-31;1942-12-23;["1896-05-06"];[119];[]
 119;Knapec;Veronika;1870-10-21;;[];[];[3,1]
+120;Berzák;Jozef;1867-03-30;;["1893-11-15"];[48];[]
