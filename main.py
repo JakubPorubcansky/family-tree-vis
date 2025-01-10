@@ -31,17 +31,27 @@ class CustomDate:
                 continue
 
         raise RuntimeError(f"Error: Unable to parse date {date_str}")
-    
+
 def generate_family_tree(df):
     family_tree = {}
     for _, row in df.iterrows():
         birth_date = CustomDate.parse_datetime(row["birth_date"]) if pd.notna(row["birth_date"]) else None
         death_date = CustomDate.parse_datetime(row["death_date"]) if pd.notna(row["death_date"]) else None
+        if birth_date and death_date and birth_date.date > death_date.date:
+            raise ValueError(f"Error: {row['first_name']} {row['last_name']} has birth date after death date")
         age = death_date.date.year - birth_date.date.year if birth_date and death_date else None  
         
         marriage_dates = eval(row["marriage_dates"]) if pd.notna(row["marriage_dates"]) else []
         marriage_dates = [CustomDate.parse_datetime(date) for date in marriage_dates]
-        marriage_ages = [marriage_date.date.year - birth_date.date.year for marriage_date in marriage_dates]
+        
+        marriage_ages = []
+        for marriage_date in marriage_dates:
+            if birth_date:
+                if marriage_date.date < birth_date.date:
+                    raise ValueError(f"Error: {row['first_name']} {row['last_name']} married before they were born")
+                marriage_ages.append(marriage_date.date.year - birth_date.date.year)
+            else:
+                marriage_ages.append(None)
 
         person = {
             "id": row["id"],
